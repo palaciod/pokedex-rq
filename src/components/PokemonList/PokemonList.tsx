@@ -13,7 +13,7 @@ type PokemonListProps = {
 
 export const PokemonList: FC<PokemonListProps> = ({ filter }) => {
   const classes = usePokemonListStyles();
-  const { pokemons, loading } = useGetPokemons();
+  const { pokemons, loading, error } = useGetPokemons();
   const { pokemonName } = useParams();
   const navigate = useNavigate();
 
@@ -31,6 +31,10 @@ export const PokemonList: FC<PokemonListProps> = ({ filter }) => {
 
   if (loading){
     return <div className={classes.root}>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className={classes.root}> Failed to fetch Pokemon </div>
   }
 
   return (

@@ -11,8 +11,9 @@ type FullDetailedCardProps = {
 export const FullDetailedCard: FC<FullDetailedCardProps> = ({ name }) => {
   const classes = useFullDetailsCardStyles();
   const capitalizedName = capitalizeFirst(name);
-  const { data, loading } = useGetSinglePokemon({ name: capitalizedName });
+  const { data, loading, error } = useGetSinglePokemon({ name: capitalizedName });
   const pokemon = data?.pokemon;
+  if (error) return <div className={classes.card}> Failed to fetch Pokemon </div>
   return (
     <div className={classes.card}>
       {loading ? (
